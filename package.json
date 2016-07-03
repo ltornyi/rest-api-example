@@ -13,9 +13,11 @@
   "author": "Lajos Tornyi <ltornyi@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "epa": "^0.2.1",
     "express": "^4.14.0",
-    "massive": "^2.3.0"
+    "massive": "^2.3.0",
+    "morgan": "^1.7.0"
   },
   "devDependencies": {
     "mocha": "^2.5.3"
