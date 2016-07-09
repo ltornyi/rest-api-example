@@ -32,18 +32,22 @@ NODE_ENV=production node server
 
 ## Test the APIs
 Create a new author:
-
+```sh
 curl -i -X POST -H 'Content-Type: application/json' -d '{"name":"New Author"}' http://localhost:3000/authors
-
+```
 Query all authors:
+```sh
 curl -i -X GET http://localhost:3000/authors
-
+```
 Query author with id=1:
+```sh
 curl -i -X GET http://localhost:3000/authors/1
-
+```
 Update author with id=1:
+```sh
 curl -i -X PUT -H 'Content-Type: application/json' -d '{"name":"Author updated"}' http://localhost:3000/authors/1
-
+```
 Delete author with id=1:
-
+```sh
 curl -i -X DELETE http://localhost:3000/authors/1
+```
