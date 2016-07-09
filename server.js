@@ -15,6 +15,15 @@ app.set('db', massiveInstance);
 //controllers
 app.use(controllers);
 
+if (process.argv.length===3 && process.argv[2]==="install") {
+  var fs = require("fs");
+  var path = require("path");
+  var buildDir = path.join(__dirname, "./build");
+  var sqlFile = path.join(buildDir,"install.sql");
+  var sql = fs.readFileSync(sqlFile,{encoding : "utf-8"});
+  massiveInstance.runSync(sql);
+}
+
 app.listen(3000, function(){
     console.log('Listening on port 3000...');
 });
