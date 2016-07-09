@@ -6,7 +6,7 @@ var findAll = function(req, res) {
     db.test1.authors.find({}, function(err, result) {
         res.send(result);
     });
-}
+};
 
 var findById = function(req, res) {
     var db = req.app.get('db');
@@ -23,55 +23,55 @@ var findById = function(req, res) {
         res.status('404').send('');
     }
 
-}
+};
 
 var add = function(req, res) {
-  var db = req.app.get('db');
-  var a = req.body;
-  if (a.hasOwnProperty('author_id')) {
-    //PK specified but this is the insert function
-    delete a.author_id;
-  }
-  db.test1.authors.save(a, function(err,inserted){
-    if (err) {
-      res.send({'error':'An error has occurred', 'text':err});
-    } else {
-      res.status('201');
-      res.setHeader("Location","/authors/" + inserted.author_id);
-      res.send(inserted);
+    var db = req.app.get('db');
+    var a = req.body;
+    if (a.hasOwnProperty('author_id')) {
+        //PK specified but this is the insert function
+        delete a.author_id;
     }
-  })
-}
+    db.test1.authors.save(a, function(err,inserted){
+        if (err) {
+            res.send({'error':'An error has occurred', 'text':err});
+        } else {
+            res.status('201');
+            res.setHeader('Location','/authors/' + inserted.author_id);
+            res.send(inserted);
+        }
+    });
+};
 
 var update = function(req, res) {
-  var db = req.app.get('db');
-  var a = req.body;
-  var id = Number(req.params.id);
-  a.author_id = id;
-  db.test1.authors.save(a, function(err,updated) {
-    if (err) {
-      res.send({'error':'An error has occurred', 'text':err});
-    } else {
-      res.status('200');
-      res.send(updated);
-    }
-  })
-}
+    var db = req.app.get('db');
+    var a = req.body;
+    var id = Number(req.params.id);
+    a.author_id = id;
+    db.test1.authors.save(a, function(err,updated) {
+        if (err) {
+            res.send({'error':'An error has occurred', 'text':err});
+        } else {
+            res.status('200');
+            res.send(updated);
+        }
+    });
+};
 
 var _delete = function(req, res) {
-  var db = req.app.get('db');
-  var a = {};
-  var id = Number(req.params.id);
-  a.author_id = id;
-  db.test1.authors.destroy(a, function(err, deleted) {
-    if (err) {
-      res.send({'error':'An error has occurred', 'text':err});
-    } else {
-      res.status('200');
-      res.send(deleted);
-    }
-  })
-}
+    var db = req.app.get('db');
+    var a = {};
+    var id = Number(req.params.id);
+    a.author_id = id;
+    db.test1.authors.destroy(a, function(err, deleted) {
+        if (err) {
+            res.send({'error':'An error has occurred', 'text':err});
+        } else {
+            res.status('200');
+            res.send(deleted);
+        }
+    });
+};
 
 router.get('/', findAll);
 router.get('/:id', findById);
