@@ -58,9 +58,25 @@ var update = function(req, res) {
   })
 }
 
+var _delete = function(req, res) {
+  var db = req.app.get('db');
+  var a = {};
+  var id = Number(req.params.id);
+  a.author_id = id;
+  db.test1.authors.destroy(a, function(err, deleted) {
+    if (err) {
+      res.send({'error':'An error has occurred', 'text':err});
+    } else {
+      res.status('200');
+      res.send(deleted);
+    }
+  })
+}
+
 router.get('/', findAll);
 router.get('/:id', findById);
 router.post('/', add);
 router.put('/:id', update);
+router.delete('/:id', _delete);
 
 module.exports = router;
